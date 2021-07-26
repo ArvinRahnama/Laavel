@@ -11,62 +11,21 @@
 |
 */
 
-use App\Models\Articles;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ArticleController;
 
-Route::get('/', function () {
-    dd(Articles::All());
-    return view('index');
-});
+Route::get('/', [HomeController::class, "home"]);
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::get('/about', [HomeController::class, "about"]);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/contact', [HomeController::class, "contact"]);
 
-
-Route::prefix('admin')->group(function() {
-    Route::get('/articles/create' , function() {
-
-        return view('admin.articles.create');
-    });
-    Route::post('/articles/create',function() {
-
-        $validate_data = Validator::make(request()->all() , [
-            'title' => 'required|min:10|max:50',
-            'body' => 'required'
-        ])->validated();
-
-
-        Articles::create([
-            'title' => $validate_data['title'],
-            'slug' => $validate_data['title'],
-            'body' => $validate_data['body'],
-        ]);
-
-        return redirect('/admin/articles/create');
-    });
-    Route::get('/articles/{id}/edit' , function($id) {
-       $article = Articles::findOrFail($id);
-
-       return view('admin.articles.edit' , [
-           'article' => $article
-       ]);
-    });
-    Route::put('/articles/{id}/edit' , function($id) {
-        $validate_data = Validator::make(request()->all() , [
-            'title' => 'required|min:10|max:50',
-            'body' => 'required'
-        ])->validated();
-
-        $article = Articles::findOrFail($id);
-
-        $article->update($validate_data);
-
-        return back();
-    });
+Route::prefix('admin')->group(function () {
+    Route::get('/articles', [ArticleController::class, "index"]);
+    Route::delete('/articles/{id}', [ArticleController::class, "delete"]);
+    Route::get('/articles/create', [ArticleController::class, "create"]);
+    Route::post('/articles/create', [ArticleController::class, 'store']);
+    Route::get('/articles/{id}/edit', [ArticleController::class, "edit"]);
+    Route::put('/articles/{id}/edit', [ArticleController::class, "update"]);
 });
 
