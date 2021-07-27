@@ -22,10 +22,10 @@ Route::get('/contact', [HomeController::class, "contact"]);
 
 Route::prefix('admin')->group(function () {
     Route::get('/articles', [ArticleController::class, "index"]);
-    Route::delete('/articles/{id}', [ArticleController::class, "delete"]);
+    Route::delete('/articles/{articles}', [ArticleController::class, "delete"]);
     Route::get('/articles/create', [ArticleController::class, "create"]);
     Route::post('/articles/create', [ArticleController::class, 'store']);
-    Route::get('/articles/{id}/edit', [ArticleController::class, "edit"]);
-    Route::put('/articles/{id}/edit', [ArticleController::class, "update"]);
+    Route::get('/articles/{articles}/edit', [ArticleController::class, "edit"]);
+    Route::put('/articles/{articles}/edit', [ArticleController::class, "update"]);
 });
 
