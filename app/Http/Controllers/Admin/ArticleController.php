@@ -42,12 +42,9 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function update($id)
+    public function update(ArticleRequest $request,$id)
     {
-        $validate_data = $this->validate(request(), [
-            'title' => 'required|min:10|max:50',
-            'body' => 'required'
-        ]);
+        $validate_data = $request->validated();
 
         $article = Articles::findOrFail($id);
 
