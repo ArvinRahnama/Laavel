@@ -21,11 +21,9 @@ class ArticleController extends Controller
 
     public function store()
     {
-        $validate_data = Validator::make(request()->all(), [
+        $validate_data = $this->validate(request(), [
             'title' => 'required|min:7|max:50',
-            'body' => 'required'
-        ])->validated();
-
+            'body' => 'required']);
 
         Articles::create([
             'title' => $validate_data['title'],
@@ -47,10 +45,10 @@ class ArticleController extends Controller
 
     public function update($id)
     {
-        $validate_data = Validator::make(request()->all(), [
+        $validate_data = $this->validate(request(), [
             'title' => 'required|min:10|max:50',
             'body' => 'required'
-        ])->validated();
+        ]);
 
         $article = Articles::findOrFail($id);
 
