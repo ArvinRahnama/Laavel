@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Articles;
 use Illuminate\Support\Facades\Validator;
@@ -19,11 +20,9 @@ class ArticleController extends Controller
         return view('admin.articles.create');
     }
 
-    public function store()
+    public function store(ArticleRequest $request)
     {
-        $validate_data = $this->validate(request(), [
-            'title' => 'required|min:7|max:50',
-            'body' => 'required']);
+        $validate_data = $request->validated();
 
         Articles::create([
             'title' => $validate_data['title'],
