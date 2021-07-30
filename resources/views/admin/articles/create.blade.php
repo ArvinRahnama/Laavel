@@ -12,7 +12,7 @@
             </ul>
         </div>
     @endif
-    <form action="/admin/articles/create" method="post">
+    <form action="/admin/articles" method="post">
         @csrf
         <div class="form-group">
             <label for="title">title :</label>

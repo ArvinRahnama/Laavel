@@ -21,11 +21,13 @@ Route::get('/about', [HomeController::class, "about"]);
 Route::get('/contact', [HomeController::class, "contact"]);
 
 Route::prefix('admin')->group(function () {
-    Route::get('/articles', [ArticleController::class, "index"]);
-    Route::delete('/articles/{articles}', [ArticleController::class, "delete"]);
-    Route::get('/articles/create', [ArticleController::class, "create"]);
-    Route::post('/articles/create', [ArticleController::class, 'store']);
-    Route::get('/articles/{articles}/edit', [ArticleController::class, "edit"]);
-    Route::put('/articles/{articles}/edit', [ArticleController::class, "update"]);
+//    Route::get('/articles', [ArticleController2::class, "index"]);
+//    Route::delete('/articles/{articles}', [ArticleController2::class, "delete"]);
+//    Route::get('/articles/create', [ArticleController2::class, "create"]);
+//    Route::post('/articles/create', [ArticleController2::class, 'store']);
+//    Route::get('/articles/{articles}/edit', [ArticleController2::class, "edit"]);
+//    Route::put('/articles/{articles}/edit', [ArticleController2::class, "update"]);
+
+    Route::resources(['articles'=>ArticleController::class]);
 });
 
