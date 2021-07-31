@@ -11,13 +11,15 @@ class HomeController extends Controller
 {
     public function Home()
     {
-        Mail::to('arvin.rnm@gmail.com')->send(new testmail('Arvin', 2001));
+//        Mail::to('arvin.rnm@gmail.com')->send(new testmail('Arvin', 2001));
+        session(['key'=>'value']);
         $articles = Articles::all();
         return view('index', compact('articles'));
     }
 
     public function about()
     {
+        dd(session()->all());
         return view('about');
     }
 
