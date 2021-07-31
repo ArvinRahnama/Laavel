@@ -36,7 +36,7 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest  $request)
     {
         $validate_data = $request->validated();
 
@@ -49,16 +49,16 @@ class ArticleController extends Controller
         return redirect('/admin/articles/create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Articles  $articles
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Articles $articles)
-    {
-        //
-    }
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  \App\Models\Articles  $articles
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show(Articles $articles)
+//    {
+//        //
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -80,11 +80,11 @@ class ArticleController extends Controller
      * @param  \App\Models\Articles  $articles
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, Articles $articles)
+    public function update(Request $request, Articles $articles)
     {
-        validatedata = $request->validated();
+        $validate_data = $request->validated();
 
-        $articles->update($validatedata);
+        $articles->update($validate_data);
 
         return back();
     }

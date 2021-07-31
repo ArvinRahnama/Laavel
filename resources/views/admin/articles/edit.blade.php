@@ -17,11 +17,11 @@
         @method('put')
         <div class="form-group">
             <label for="title">title :</label>
-            <input type="text" name="title" class="form-control" value="{{ $article->title }}">
+            <input type="text" name="title" class="form-control" value="{{$article->title}}">
         </div>
         <div class="form-group">
             <label for="body">body :</label>
-            <textarea name="body" id="body" cols="30" rows="10" class="form-control">{{ $article->body }}</textarea>
+            <textarea name="body" id="body" cols="30" rows="10" class="form-control">{{$article->body}}</textarea>
         </div>
         <button class="btn btn-info">update</button>
     </form>

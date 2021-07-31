@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ArticleController;
 
 Route::get('/', [HomeController::class, "home"]);
 
+Route::get('/articles/{articleSlug}',[\App\Http\Controllers\ArticleController::class,'single']);
+
 Route::get('/about', [HomeController::class, "about"]);
 
 Route::get('/contact', [HomeController::class, "contact"]);

@@ -9,8 +9,8 @@ class HomeController extends Controller
 {
     public function Home()
     {
-        dd(Articles::All());
-        return view('index');
+        $articles = Articles::all();
+        return view('index', compact('articles'));
     }
 
     public function about()
