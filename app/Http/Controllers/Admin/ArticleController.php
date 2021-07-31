@@ -42,7 +42,7 @@ class ArticleController extends Controller
 
         Articles::create([
             'title' => $validate_data['title'],
-            'slug' => $validate_data['title'],
+//            'slug' => $validate_data['title'],
             'body' => $validate_data['body'],
         ]);
 
