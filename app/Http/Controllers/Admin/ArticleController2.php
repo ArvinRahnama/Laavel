@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
-use App\Models\Articles;
+use App\Models\Article;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController2 extends Controller
 {
     public function index()
     {
-        return view('admin.articles.index', ['articles' => Articles::all()]);
+        return view('admin.articles.index', ['articles' => Article::all()]);
     }
 
     public function create()
@@ -24,7 +24,7 @@ class ArticleController2 extends Controller
     {
         $validate_data = $request->validated();
 
-        Articles::create([
+        Article::create([
             'title' => $validate_data['title'],
             'slug' => $validate_data['title'],
             'body' => $validate_data['body'],
@@ -33,14 +33,14 @@ class ArticleController2 extends Controller
         return redirect('/admin/articles/create');
     }
 
-    public function edit(Articles $articles)
+    public function edit(Article $articles)
     {
         return view('admin.articles.edit', [
             'article' => $articles
         ]);
     }
 
-    public function update(ArticleRequest $request,Articles $articles)
+    public function update(ArticleRequest $request, Article $articles)
     {
         $validate_data = $request->validated();
 
@@ -49,7 +49,7 @@ class ArticleController2 extends Controller
         return back();
     }
 
-    public function delete(Articles $articles)
+    public function delete(Article $articles)
     {
         $articles->delete();
         return back();

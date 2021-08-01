@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
-use App\Models\Articles;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 
@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('admin.articles.index', ['articles' => Articles::all()]);
+        return view('admin.articles.index', ['articles' => Article::all()]);
     }
 
     /**
@@ -40,22 +40,22 @@ class ArticleController extends Controller
     {
         $validate_data = $request->validated();
 
-        Articles::create([
+        Article::create([
             'title' => $validate_data['title'],
 //            'slug' => $validate_data['title'],
             'body' => $validate_data['body'],
         ]);
 
-        return redirect('/admin/articles/create');
+        return redirect('/admin/articles');
     }
 
 //    /**
 //     * Display the specified resource.
 //     *
-//     * @param  \App\Models\Articles  $articles
+//     * @param  \App\Models\Article  $article
 //     * @return \Illuminate\Http\Response
 //     */
-//    public function show(Articles $articles)
+//    public function show(Article $article)
 //    {
 //        //
 //    }
@@ -63,13 +63,13 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articles $articles)
+    public function edit(Article $article)
     {
         return view('admin.articles.edit', [
-            'article' => $articles
+            'article' => $article
         ]);
     }
 
@@ -77,27 +77,31 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articles $articles)
+    public function update(ArticleRequest $request, Article $article)
     {
         $validate_data = $request->validated();
 
-        $articles->update($validate_data);
+        $article->update($validate_data);
 
-        return back();
+        return redirect('/admin/articles');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articles $articles)
+    public function destroy(Article $article)
     {
-        $articles->delete();
+        $article->delete();
         return back();
+    }
+    public function single($article)
+    {
+        return view('single',compact('article'));
     }
 }

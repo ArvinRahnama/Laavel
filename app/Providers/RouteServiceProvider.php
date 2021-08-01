@@ -7,7 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
-use App\Models\Articles;
+use App\Models\Article;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('articleSlug' , function($value) {
-            return Articles::where('slug' , $value)->firstOrFail();
+            return Article::where('slug' , $value)->firstOrFail();
         });
     }
 

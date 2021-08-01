@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\testmail;
 use http\Cookie;
-use App\Models\Articles;
+use App\Models\Article;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -34,7 +34,7 @@ class HomeController extends Controller
 //        Mail::to('arvin.rnm@gmail.com')->send(new testmail('Arvin', 2001));
 //        session(['key'=>'value']);
 //        cookie()->queue(Cookie('name',"hasan",1));
-        $articles = Articles::all();
+        $articles = Article::all();
         return view('index', compact('articles'));
     }
 
