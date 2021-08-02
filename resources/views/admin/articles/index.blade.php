@@ -8,7 +8,7 @@
         <tr>
             <th>id</th>
             <th>title</th>
-            <th>operation</th>
+            <th>operation  <a href="{{route('articles.create')}}" class="btn btn-success">Create</a></th>
         </tr>
         </thead>
         <tbody>
