@@ -21,6 +21,7 @@
                         @CSRF
                         @method('delete')
                         <button class="btn btn-danger">delete</button>
+                        <a href="/admin/articles/{{$article->id}}/edit" class="btn btn-info">Update</a>
                     </form>
                 </td>
             </tr>

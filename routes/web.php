@@ -30,7 +30,7 @@ Route::prefix('admin')->group(function () {
 //    Route::get('/articles/{articles}/edit', [ArticleController2::class, "edit"]);
 //    Route::put('/articles/{articles}/edit', [ArticleController2::class, "update"]);
 
-    Route::resource('articles', ArticleController::class);
+    Route::resource('articles', ArticleController::class)->middleware('auth');
 });
 
 Auth::routes();
