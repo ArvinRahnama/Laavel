@@ -17,13 +17,19 @@
         <div class="form-group">
             <label for="title">title :</label>
             <input type="text" name="title" class="form-control">
-        </div>
-        <br>
-        <div class="form-group">
-            <label for="body">body :</label>
-            <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
-        </div>
-        <br>
-        <button class="btn btn-danger">send</button>
+            <div class="form-group">
+                <label for="">Category:</label>
+                <select name="categories[]" class="form-control" multiple>
+                    @foreach(\App\Models\Category::all() as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="body">body :</label>
+                <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <br>
+            <button class="btn btn-danger">send</button>
     </form>
 @endsection
