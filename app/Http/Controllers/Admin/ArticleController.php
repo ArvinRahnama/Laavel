@@ -14,6 +14,7 @@ class ArticleController extends Controller
     {
         $this->middleware('auth')->except('single');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,17 +38,25 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest  $request)
+    public function store(ArticleRequest $request)
     {
         $validate_data = $request->validated();
 
-        Article::create([
+//        Article::create([
+//            'user_id' => auth()->user()->id,
+//            'title' => $validate_data['title'],
+////            'slug' => $validate_data['title'],
+//            'body' => $validate_data['body']
+//        ]);
+
+//        or
+
+        auth()->user()->articles()->create([
             'title' => $validate_data['title'],
-//            'slug' => $validate_data['title'],
-            'body' => $validate_data['body'],
+            'body' => $validate_data['body']
         ]);
 
         return redirect('/admin/articles');
@@ -67,7 +76,7 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param \App\Models\Article $article
      * @return \Illuminate\Http\Response
      */
     public function edit(Article $article)
@@ -80,8 +89,8 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Article $article
      * @return \Illuminate\Http\Response
      */
     public function update(ArticleRequest $request, Article $article)
@@ -96,7 +105,7 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param \App\Models\Article $article
      * @return \Illuminate\Http\Response
      */
     public function destroy(Article $article)
@@ -104,8 +113,9 @@ class ArticleController extends Controller
         $article->delete();
         return back();
     }
+
     public function single($article)
     {
-        return view('single',compact('article'));
+        return view('single', compact('article'));
     }
 }
