@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ArticleController;
 
 Route::get('/', [HomeController::class, "home"]);
 
+Route::get('/home', [HomeController::class, "home"]);
+
 Route::get('/articles/{articleSlug}', [ArticleController::class, "single"]);
 
 Route::get('/about', [HomeController::class, "about"]);
@@ -30,7 +32,7 @@ Route::prefix('admin')->group(function () {
 //    Route::get('/articles/{articles}/edit', [ArticleController2::class, "edit"]);
 //    Route::put('/articles/{articles}/edit', [ArticleController2::class, "update"]);
 
-    Route::resource('articles', ArticleController::class)->middleware('auth');
+    Route::resource('articles', ArticleController::class);
 });
 
 Auth::routes();

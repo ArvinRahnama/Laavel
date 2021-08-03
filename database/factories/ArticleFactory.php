@@ -2,13 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Article;
+use App\Models\Article;
 use Faker\Generator as Faker;
 
-$factory->define(Article::class, function (Faker $faker) {
+$factory->definitio(Article::class, function (Faker $faker) {
     return [
+        'user_id' => 1,
         'title' => $faker->text(50),
         'slug' => $faker->slug(),
-        'body' => $faker->paragraph(rand(5,20))
+        'body' => $faker->paragraph(rand(5, 20))
     ];
 });
