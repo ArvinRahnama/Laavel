@@ -20,6 +20,14 @@
             <input type="text" name="title" class="form-control" value="{{$article->title}}">
         </div>
         <div class="form-group">
+            <label for="">Category:</label>
+            <select name="categories[]" class="form-control" multiple>
+                @foreach(\App\Models\Category::all() as $category)
+                    <option value="{{ $category->id }}" {{in_array($category->id,$article->categories()->pluck('id')->toArray()) ? 'selected' : ''}} >{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="body">body :</label>
             <textarea name="body" id="body" cols="30" rows="10" class="form-control">{{$article->body}}</textarea>
         </div>

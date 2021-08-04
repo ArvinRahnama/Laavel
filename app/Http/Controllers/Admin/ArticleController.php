@@ -54,10 +54,11 @@ class ArticleController extends Controller
 
 //        or
 
-        auth()->user()->articles()->create([
+        $article = auth()->user()->articles()->create([
             'title' => $validate_data['title'],
             'body' => $validate_data['body']
         ]);
+        $article->categories()->attach($request->input('categories'));
 
         return redirect('/admin/articles');
     }
@@ -98,6 +99,7 @@ class ArticleController extends Controller
         $validate_data = $request->validated();
 
         $article->update($validate_data);
+        $article->categories()->sync($request->input('categories'));
 
         return redirect('/admin/articles');
     }
