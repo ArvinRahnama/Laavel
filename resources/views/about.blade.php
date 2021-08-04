@@ -3,7 +3,7 @@
 
 @section('content')
     <h2>About Page</h2>
-    <!-- /.row -->
+    <h1>;-)</h1>
 @endsection
 
 @section('sidebar')
