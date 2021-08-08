@@ -25,6 +25,12 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <label>Image:</label>
+                    <input type="file" name="image" class="form-control" placeholder="image">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="body">body :</label>
                 <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>

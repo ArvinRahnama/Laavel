@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use Sluggable;
-    protected $fillable = ['user_id','title' , 'slug' , 'body'];
+    protected $fillable = ['user_id','title' , 'slug' , 'body','image'];
     use HasFactory;
 
     public function sluggable(): array

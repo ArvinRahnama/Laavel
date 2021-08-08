@@ -18,7 +18,6 @@
                     <li>{{$category->name}}</li>
                 @endforeach
             </ul>
-            <a href="#">Start Bootstrap</a>
         </div>
     </div>
 @endsection

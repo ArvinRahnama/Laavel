@@ -41,9 +41,10 @@ class ArticleController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest $request)
+    public function store(ArticleRequest $request,Article $article)
     {
         $validate_data = $request->validated();
+//        dd($request->all());
 
 //        Article::create([
 //            'user_id' => auth()->user()->id,
@@ -53,11 +54,15 @@ class ArticleController extends Controller
 //        ]);
 
 //        or
-
-        $article = auth()->user()->articles()->create([
-            'title' => $validate_data['title'],
-            'body' => $validate_data['body']
-        ]);
+        if ($image = $request->file('image')) {
+            $destinationPath = '/images';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $article = auth()->user()->articles()->create([
+                'title' => $validate_data['title'],
+                'body' => $validate_data['body'],
+                'image'=>$validate_data['image']
+            ]);}
         $article->categories()->attach($request->input('categories'));
 
         return redirect('/admin/articles');
