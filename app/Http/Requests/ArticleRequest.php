@@ -26,7 +26,8 @@ class ArticleRequest extends FormRequest
         return [
 
             'title' => 'required|min:7|max:50',
-            'body' => 'required'
+            'body' => 'required',
+            'file' => 'mimes:jpeg,bmp,png,jpg'
         ];
     }
 }

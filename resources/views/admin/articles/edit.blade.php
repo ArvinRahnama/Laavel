@@ -12,12 +12,19 @@
             </ul>
         </div>
     @endif
-    <form action="/admin/articles/{{ $article->id }}" method="post">
+    <form action="/admin/articles/{{ $article->id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
+        <div class="card mb-4">
+            <img class="card-img-top" src="{{route('home')}}/storage/Article/Images/{{$article->file_path}}" alt="Card image cap">
+        </div>
         <div class="form-group">
             <label for="title">title :</label>
             <input type="text" name="title" class="form-control" value="{{$article->title}}">
+        </div>
+        <div class="form-group">
+            <label>Image:</label>
+            <input type="file" name="file" class="form-control" placeholder="image" required>
         </div>
         <div class="form-group">
             <label for="">Category:</label>

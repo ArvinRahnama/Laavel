@@ -2,22 +2,19 @@
 
 
 @section('content')
-    <h1 class="my-4">Page Heading
-        <small>Secondary Text</small>
-    </h1>
+
 
 @foreach($articles as $article)
     <!-- Blog Post -->
     <div class="card mb-4">
-        <img class="card-img-top" src="/images/cms-laravel-cover-1.jpg" alt="Card image cap">
+        <img class="card-img-top" src="{{route('home')}}/storage/Article/Images/{{$article->file_path}}" alt="Card image cap">
         <div class="card-body">
             <h2 class="card-title">{{$article->title}}</h2>
             <p class="card-text">{{$article->body}}</p>
             <a href="/articles/{{$article->slug}}" class="btn btn-primary">Read More &rarr;</a>
         </div>
         <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="#">Start Bootstrap</a>
+            Posted on {{$article->created_at}}
         </div>
     </div>
 @endforeach

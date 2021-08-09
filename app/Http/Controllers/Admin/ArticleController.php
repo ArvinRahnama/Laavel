@@ -44,7 +44,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request,Article $article)
     {
         $validate_data = $request->validated();
-        $request->validate(['image' => 'mimes:jpeg,bmp,png']);
+//        $request->validate(['image' => 'mimes:jpeg,bmp,png']);
 //        dd($validate_data['image']);
 
 //        Article::create([
@@ -61,15 +61,14 @@ class ArticleController extends Controller
 //            $image->move($destinationPath, $profileImage);}
         if ($request->hasFile('file')) {
 
-            $destinationPath = 'images';
-            $profileImage = date('YmdHis') . "." . $request->file->getClientOriginalExtension();
-            $request->file->move($destinationPath, $profileImage);
+            $validate_data['file']->store('Article/Images', 'public');
 //            $article = auth()->user()->articles()->create([
+//
 //            ]);
 
             $article = new Article([
                 'user_id' => auth()->user()->id,
-                "file_path" =>  $request->file,
+                "file_path" =>  $validate_data['file']->hashName(),
                 'title' => $validate_data['title'],
                 'body' => $validate_data['body']
             ]);
@@ -115,8 +114,16 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $validate_data = $request->validated();
-
-        $article->update($validate_data);
+        if ($request->hasFile('file')){
+            unlink('storage/Article/Images/'.$article->file_path);
+            $request->file->store('Article/Images', 'public');
+        }
+        $article->update([
+            'user_id' => auth()->user()->id,
+            "file_path" =>  $validate_data['file']->hashName(),
+            'title' => $validate_data['title'],
+            'body' => $validate_data['body']
+        ]);
         $article->categories()->sync($request->input('categories'));
 
         return redirect('/admin/articles');
@@ -130,6 +137,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        @unlink('storage/Article/Images/'.$article->file_path);
         $article->delete();
         return back();
     }

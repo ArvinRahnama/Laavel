@@ -14,7 +14,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ArticleController;
 
-Route::get('/', [HomeController::class, "home"]);
+Route::get('/', [HomeController::class, "home"])->name('home');
 
 Route::get('/home', [HomeController::class, "home"]);
 

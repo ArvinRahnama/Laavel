@@ -15,7 +15,7 @@
         @foreach($articles as $article)
             <tr>
                 <td>{{$article->id}}</td>
-                <td>{{$article->title}}</td>
+                <td><a href="/articles/{{$article->slug}}">{{$article->title}}</a></td>
                 <td>
                     <form action="/admin/articles/{{$article->id}}" method="post">
                         @CSRF
