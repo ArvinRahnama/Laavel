@@ -44,7 +44,8 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request,Article $article)
     {
         $validate_data = $request->validated();
-//        dd($request->all());
+        $request->validate(['image' => 'mimes:jpeg,bmp,png']);
+//        dd($validate_data['image']);
 
 //        Article::create([
 //            'user_id' => auth()->user()->id,
@@ -54,15 +55,27 @@ class ArticleController extends Controller
 //        ]);
 
 //        or
-        if ($image = $request->file('image')) {
-            $destinationPath = '/images';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $article = auth()->user()->articles()->create([
+//        if (isset($request->image)) {
+//            $destinationPath = '/images';
+//            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+//            $image->move($destinationPath, $profileImage);}
+        if ($request->hasFile('file')) {
+
+            $destinationPath = 'images';
+            $profileImage = date('YmdHis') . "." . $request->file->getClientOriginalExtension();
+            $request->file->move($destinationPath, $profileImage);
+//            $article = auth()->user()->articles()->create([
+//            ]);
+
+            $article = new Article([
+                'user_id' => auth()->user()->id,
+                "file_path" =>  $request->file,
                 'title' => $validate_data['title'],
-                'body' => $validate_data['body'],
-                'image'=>$validate_data['image']
-            ]);}
+                'body' => $validate_data['body']
+            ]);
+            $article->save();
+        }
+
         $article->categories()->attach($request->input('categories'));
 
         return redirect('/admin/articles');

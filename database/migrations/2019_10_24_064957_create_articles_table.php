@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('title',50);
             $table->string('slug',100);
             $table->text('body');
-            $table->string('image');
+            $table->string('file_path');
             $table->timestamps();
         });
     }

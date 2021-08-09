@@ -12,7 +12,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{route('articles.store')}}" method="post">
+    <form action="{{route('articles.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">title :</label>
@@ -28,7 +28,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label>Image:</label>
-                    <input type="file" name="image" class="form-control" placeholder="image">
+                    <input type="file" name="file" class="form-control" placeholder="image" required>
                 </div>
             </div>
             <div class="form-group">
@@ -36,6 +36,6 @@
                 <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
             </div>
             <br>
-            <button class="btn btn-danger">send</button>
+            <button class="btn btn-danger">Save</button>
     </form>
 @endsection
