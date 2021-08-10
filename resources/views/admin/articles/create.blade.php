@@ -18,6 +18,10 @@
             <label for="title">title :</label>
             <input type="text" name="title" class="form-control">
             <div class="form-group">
+                <label for="body">Summary:</label>
+                <textarea name="summary" id="summary" cols="30" rows="2" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
                 <label for="">Category:</label>
                 <select name="categories[]" class="form-control" multiple>
                     @foreach(\App\Models\Category::all() as $category)

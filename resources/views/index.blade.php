@@ -10,7 +10,7 @@
         <img class="card-img-top" src="{{route('home')}}/storage/Article/Images/{{$article->file_path}}" alt="Card image cap">
         <div class="card-body">
             <h2 class="card-title">{{$article->title}}</h2>
-            <p class="card-text">{{$article->body}}</p>
+            <p class="card-text">{{$article->summary}}</p>
             <a href="/articles/{{$article->slug}}" class="btn btn-primary">Read More &rarr;</a>
         </div>
         <div class="card-footer text-muted">

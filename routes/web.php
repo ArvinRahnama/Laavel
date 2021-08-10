@@ -22,7 +22,9 @@ Route::get('/articles/{articleSlug}', [ArticleController::class, "single"]);
 
 Route::get('/about', [HomeController::class, "about"]);
 
-Route::get('/contact', [HomeController::class, "contact"]);
+Route::get('/contact', [HomeController::class, "contact"])->name('contact');
+
+Route::get('/services', [HomeController::class, "services"])->name('services');
 
 Route::prefix('admin')->group(function () {
 //    Route::get('/articles', [ArticleController2::class, "index"]);

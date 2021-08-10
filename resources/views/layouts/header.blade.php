@@ -9,20 +9,20 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
+{{--                        <span class="sr-only">(current)</span>--}}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                    <a class="nav-link" href="/services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
             </ul>
-            @if(auth()->check())
+            @if(auth()->check())'
                 <a href="/admin/articles" class="btn btn-info">Admin</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf

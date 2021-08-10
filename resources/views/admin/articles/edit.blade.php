@@ -23,8 +23,12 @@
             <input type="text" name="title" class="form-control" value="{{$article->title}}">
         </div>
         <div class="form-group">
+            <label for="body">Summary:</label>
+            <textarea name="summary" id="summary" cols="30" rows="2" class="form-control">{{$article->summary}}</textarea>
+        </div>
+        <div class="form-group">
             <label>Image:</label>
-            <input type="file" name="file" class="form-control" placeholder="image" required>
+            <input type="file" name="file" class="form-control" placeholder="image" >
         </div>
         <div class="form-group">
             <label for="">Category:</label>

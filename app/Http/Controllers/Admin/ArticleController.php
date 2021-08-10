@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 
 class ArticleController extends Controller
@@ -70,7 +71,8 @@ class ArticleController extends Controller
                 'user_id' => auth()->user()->id,
                 "file_path" =>  $validate_data['file']->hashName(),
                 'title' => $validate_data['title'],
-                'body' => $validate_data['body']
+                'body' => $validate_data['body'],
+                'summary'=>$validate_data['summary']
             ]);
             $article->save();
         }
@@ -114,16 +116,26 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, Article $article)
     {
         $validate_data = $request->validated();
-        if ($request->hasFile('file')){
-            unlink('storage/Article/Images/'.$article->file_path);
+        if ($request->hasFile('file')) {
+            unlink('storage/Article/Images/' . $article->file_path);
             $request->file->store('Article/Images', 'public');
+
+            $article->update([
+                'user_id' => auth()->user()->id,
+                "file_path" =>  $request->file->hashName(),
+                'title' => $validate_data['title'],
+                'body' => $validate_data['body'],
+                'summary'=>$validate_data['summary']
+            ]);
         }
-        $article->update([
-            'user_id' => auth()->user()->id,
-            "file_path" =>  $validate_data['file']->hashName(),
-            'title' => $validate_data['title'],
-            'body' => $validate_data['body']
-        ]);
+        else {
+            $article->update([
+                'user_id' => auth()->user()->id,
+                'title' => $validate_data['title'],
+                'body' => $validate_data['body'],
+                'summary'=>$validate_data['summary']
+            ]);
+        }
         $article->categories()->sync($request->input('categories'));
 
         return redirect('/admin/articles');
